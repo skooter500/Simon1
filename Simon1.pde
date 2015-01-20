@@ -14,9 +14,13 @@ void setup()
   addSequence();
   addSequence();
   
+  printSequence();
+  
 }
 
 float halfWidth, halfHeight;
+int current = 0;
+int gameState = 0;
 
 ArrayList<Square> squares = new ArrayList<Square>();
 ArrayList<Integer> sequence = new ArrayList<Integer>();
@@ -26,10 +30,39 @@ void addSequence()
   sequence.add(new Integer((int) random(0, 4)));
 }
 
-void draw()
+void printSequence()
 {
+  for(Integer i: sequence)
+  {
+    println(i.intValue());
+  }
+}
+
+int flash = -1;
+   
+void draw()
+{   
+   if (frameCount % 30 == 0 && gameState == 0)
+    {
+      flash = sequence.get(current).intValue();
+      current ++;
+      if (current == sequence.size())
+      {
+        gameState = 1;
+        current = 0;
+        flash = -1;
+      }
+    }
+   
   for(int i = 0 ; i < squares.size() ; i ++)
   {
-    squares.get(i).display(false);
+    if (i == flash)
+    {
+      squares.get(i).display(true);
+    }     
+    else
+    {
+      squares.get(i).display(false);
+    }
   }
 }
