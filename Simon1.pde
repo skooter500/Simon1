@@ -38,10 +38,11 @@ void printSequence()
   }
 }
 
-int flash = -1;
    
 void draw()
 {   
+  int flash = -1;
+
    if (frameCount % 30 == 0 && gameState == 0)
     {
       flash = sequence.get(current).intValue();
@@ -50,7 +51,6 @@ void draw()
       {
         gameState = 1;
         current = 0;
-        flash = -1;
       }
     }
    
